@@ -8,6 +8,7 @@ class ProductsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         appComponent = DaggerAppComponent.factory().build(this)
     }
 }

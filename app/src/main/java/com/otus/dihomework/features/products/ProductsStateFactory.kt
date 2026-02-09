@@ -4,7 +4,7 @@ import com.otus.dihomework.common.domain_api.ProductWithFavorite
 import com.otus.dihomework.common.util.PriceFormatter
 import javax.inject.Inject
 
-class ProductsStateFactory @Inject constructor(val priceFormatter: PriceFormatter) {
+class ProductsStateFactory @Inject constructor(private val priceFormatter: PriceFormatter) {
 
     fun create(products: List<ProductWithFavorite>): List<ProductState> {
         return products

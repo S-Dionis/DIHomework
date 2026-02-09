@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -17,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.otus.dihomework.features.favorites.ui.FavoritesScreenContent
+import com.otus.dihomework.features.products.DaggerProductsComponent
 import com.otus.dihomework.features.products.ui.ProductsScreenContent
 
 sealed class Screen(val route: String, val titleRes: Int, val icon: ImageVector) {
@@ -29,6 +31,14 @@ sealed class Screen(val route: String, val titleRes: Int, val icon: ImageVector)
 fun MainNavigation() {
     val navController = rememberNavController()
     val screens = listOf(Screen.Products, Screen.Favorites)
+
+    val context = LocalContext.current
+    val appComponent = (context.applicationContext as ProductsApplication).appComponent
+
+    val favoritesViewModelFactory = appComponent.favoriteComponent().create().favoritesViewModelFactory()
+    val daggerProductsComponent = DaggerProductsComponent.factory().create(appComponent)
+
+    val productViewModelFactory = daggerProductsComponent.productsViewModelFactory()
 
     Scaffold(
         topBar = {
@@ -76,10 +86,10 @@ fun MainNavigation() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Products.route) {
-                ProductsScreenContent()
+                ProductsScreenContent(factory = productViewModelFactory)
             }
             composable(Screen.Favorites.route) {
-                FavoritesScreenContent()
+                FavoritesScreenContent(factory = favoritesViewModelFactory)
             }
         }
     }

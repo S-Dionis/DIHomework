@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProductsViewModel @Inject constructor(val consumeProductsUseCase: ConsumeProductsUseCase, val toggleFavoriteUseCase: ToggleFavoriteUseCase, val productsStateFactory: ProductsStateFactory) : ViewModel() {
+class ProductsViewModel @Inject constructor(private val consumeProductsUseCase: ConsumeProductsUseCase, private val toggleFavoriteUseCase: ToggleFavoriteUseCase, private val productsStateFactory: ProductsStateFactory) : ViewModel() {
 
     private val _state = MutableStateFlow(ProductsScreenState())
     val state: StateFlow<ProductsScreenState> = _state.asStateFlow()

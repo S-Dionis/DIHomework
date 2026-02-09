@@ -1,10 +1,8 @@
-package com.otus.dihomework.di
+package com.otus.dihomework
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.otus.dihomework.common.data.ProductApiService
-import com.otus.dihomework.common.data.ProductDomainMapper
-import com.otus.dihomework.common.util.PriceFormatter
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -54,16 +52,6 @@ object AppModule {
     @Singleton
     fun productApiService(retrofit: Retrofit): ProductApiService {
         return retrofit.create(ProductApiService::class.java)
-    }
-
-    @Provides
-    fun productDomainMapper(): ProductDomainMapper {
-        return ProductDomainMapper()
-    }
-
-    @Provides
-    fun priceFormatter(): PriceFormatter {
-        return PriceFormatter()
     }
 
 

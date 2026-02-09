@@ -1,4 +1,4 @@
-package com.otus.dihomework.di
+package com.otus.dihomework
 
 import com.otus.dihomework.common.data.FavoritesRepositoryImpl
 import com.otus.dihomework.common.data.ProductRepositoryImpl

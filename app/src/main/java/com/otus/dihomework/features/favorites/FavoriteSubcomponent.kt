@@ -1,7 +1,6 @@
-package com.otus.dihomework
+package com.otus.dihomework.features.favorites
 
 import com.otus.dihomework.common.di.FeatureScope
-import com.otus.dihomework.features.favorites.FavoritesViewModelFactory
 import dagger.Subcomponent
 
 @FeatureScope
@@ -16,4 +15,3 @@ interface FavoriteSubcomponent {
     fun favoritesViewModelFactory(): FavoritesViewModelFactory
 
 }
-
