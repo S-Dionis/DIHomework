@@ -1,11 +1,9 @@
 package com.otus.dihomework.common.domain_impl
 
-import com.otus.dihomework.ServiceLocator
 import com.otus.dihomework.common.domain_api.ToggleFavoriteUseCase
+import javax.inject.Inject
 
-class ToggleFavoriteUseCaseImpl() : ToggleFavoriteUseCase {
-
-    private val favoritesRepository = ServiceLocator.getFavoritesRepository()
+class ToggleFavoriteUseCaseImpl @Inject constructor(val favoritesRepository: FavoritesRepository) : ToggleFavoriteUseCase {
 
     override suspend fun invoke(productId: String, isFavorite: Boolean) {
         if (isFavorite) {
