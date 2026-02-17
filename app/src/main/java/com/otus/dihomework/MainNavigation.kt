@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -35,8 +36,12 @@ fun MainNavigation() {
     val context = LocalContext.current
     val appComponent = (context.applicationContext as ProductsApplication).appComponent
 
-    val favoritesViewModelFactory = appComponent.favoriteComponent().create().favoritesViewModelFactory()
-    val daggerProductsComponent = DaggerProductsComponent.factory().create(appComponent)
+    val favoritesViewModelFactory = remember(appComponent) {
+        appComponent.favoriteComponent().create().favoritesViewModelFactory()
+    }
+    val daggerProductsComponent = remember(appComponent) {
+        DaggerProductsComponent.factory().create(appComponent)
+    }
 
     val productViewModelFactory = daggerProductsComponent.productsViewModelFactory()
 
